@@ -1,7 +1,8 @@
 ID,Nombre,Correo,Teléfono
-1,Juan Pérez,juan.perez@example.com,555-1234
-2,Ana López,ana.lopez@example.com,555-5678
 5,sd,dsd@gmail.com,34343434
+<<<<<<< HEAD
 3344,sdsd,sdsd@gmail.com,6565656
 78,prueba,adrian@gmail.com,65554456
 0,hola,add@gmail.com,54545454
+=======
+>>>>>>> 6f713c3f08ac15945985857c600175be23a1f541
