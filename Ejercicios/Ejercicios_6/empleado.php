@@ -25,4 +25,19 @@ function agregarEmpleado()
     $newempleado = new empleado();
     $newempleado->nombre = "Adrian Rodriguez";
     $newempleado->sueldo = "2000";
+
+    $newempleado->mostrarDetalles();
 }
+
+function agregarGerente()
+{
+    $newgerente = new gerente();
+    $newgerente->nombre = "Ana Rodríguez García";
+    $newgerente->sueldo = "2,800";
+    $newgerente->departamento = "Recursos Humanos";
+
+    $newgerente->mostrarDetalles();
+}
+
+agregarEmpleado();
+agregarGerente();

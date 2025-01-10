@@ -1,7 +1,4 @@
 <?php
-
-//Clase Libro
-
 class libro
 {
     public $titulo;
