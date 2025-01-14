@@ -1,1 +1,12 @@
-Could not open input file: echo
+$tarea2 = new tarea;
+$tarea2->nombre = "Estudiar PHP";
+$tarea2->descripcion = "Repasar clases y objetos en PHP";
+$tarea2->fecha_limite = "2025-01-16";
+$tarea2->estado = false;
+
+$tarea3 = new tarea;
+$tarea3->nombre = "Ejercicio";
+$tarea3->descripcion = "Hacer 30 minutos de ejercicio físico";
+$tarea3->fecha_limite = "2025-01-14";
+$tarea3->estado = false;
+}
