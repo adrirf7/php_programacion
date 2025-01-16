@@ -33,13 +33,71 @@ class carrito
             echo "Error: Todos los campos deben ser válidos.\n";
         }
     }
+    public function eliminarProducto()
+    {
+        $nombre = readline("Ingrese el Nombre del producto que desea eliminar: ");
+
+        $producto_encontrado = null;
+        foreach ($this->productos as $index => $producto) {
+            if ($producto->nombre == $nombre) {
+                $producto_encontrado = $index;
+                break;
+            }
+        }
+
+        if ($producto_encontrado !== null) {
+            unset($this->productos[$producto_encontrado]);
+            echo ("Producto '$nombre' eliminado con exito");
+        } else {
+            echo ("Producto '$nombre' no encontrado");
+        }
+    }
     public function mostrarProductos()
     {
         foreach ($this->productos as $producto) {
             echo ("||Nombre: " . $producto->nombre . "||Precio: " . $producto->precio . "||Cantidad: " . $producto->cantidad . "\n");
         }
     }
+    public function calcularTotal()
+    {
+        $total_carrito = 0;
+        foreach ($this->productos as $producto) {
+            $producto->precio * $producto->cantidad += $total_carrito;
+        }
+        echo ($total_carrito);
+    }
 }
-$carrito = new carrito();
-$carrito->agregarProducto();
-$carrito->mostrarProductos();
+
+
+function menu()
+{
+    $opciones = [
+        1 => "Agregar un producto",
+        2 => "Eliminar un producto",
+        3 => "Monstrar carrito",
+        4 => "Mostrar el total del carrito",
+        5 => "Salir"
+    ];
+    $newcarrito = new carrito();
+    while (true) {
+        echo ("\n----MENU---\n");
+        foreach ($opciones as $indice => $valor) {
+            echo "-. $indice : $valor\n";
+        }
+        $user_input = readline("Ingrese la opcion: ");
+        echo ("\n");
+        if ($user_input == 1) {
+            $newcarrito->agregarProducto();
+        } elseif ($user_input == 2) {
+            $newcarrito->eliminarProducto();
+        } elseif ($user_input == 3) {
+            echo ($newcarrito->mostrarProductos());
+        } elseif ($user_input == 4) {
+            $newcarrito->calcularTotal();
+        } elseif ($user_input == 5) {
+            echo ("Saliendo del programa...");
+            break;
+        }
+    }
+}
+menu();
