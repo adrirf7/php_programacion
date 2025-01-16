@@ -62,12 +62,11 @@ class carrito
     {
         $total_carrito = 0;
         foreach ($this->productos as $producto) {
-            $producto->precio * $producto->cantidad += $total_carrito;
+            $total_carrito += $producto->precio * $producto->cantidad;
         }
-        echo ($total_carrito);
+        echo ("El total de tu carrito es de:  $total_carrito");
     }
 }
-
 
 function menu()
 {
@@ -97,6 +96,8 @@ function menu()
         } elseif ($user_input == 5) {
             echo ("Saliendo del programa...");
             break;
+        } else {
+            echo ("--Error--Ingresa una opcion valida");
         }
     }
 }
