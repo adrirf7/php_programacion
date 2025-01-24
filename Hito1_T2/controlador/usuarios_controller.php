@@ -9,10 +9,13 @@ class usuariosController
     {
         $this->modelo = new usuario();
     }
-
-    public function agregarUsuario($nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion)
+    public function iniciarSesion($correo, $password)
     {
-        $this->modelo->agregarUsuario($nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion);
+        $this->modelo->iniciarSesion($correo, $password);
+    }
+    public function agregarUsuario($nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion)
+    {
+        $this->modelo->agregarUsuario($nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion);
     }
 
     public function listarUsuarios()

@@ -10,11 +10,36 @@ class usuario
         $this->conexion = new Conexion();
     }
 
-    public function agregarUsuario($nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion)
+    public function iniciarSesion($correo, $password)
     {
-        $query = "INSERT INTO usuarios (nombre, apellido, email, edad, plan_base, duracion_suscripcion) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "SELECT id, nombre, apellidos, password FROM usuarios WHERE correo = ?";
         $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("sssiss", $nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion);
+        $stmt->bind_param("s", $correo);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows === 1) {
+            $usuario = $resultado->fetch_assoc();
+
+            // Verificar la contraseña
+            if (password_verify($password, $usuario['password'])) {
+                echo "Inicio de sesión exitoso. Bienvenido, " . $usuario['nombre'] . " " . $usuario['apellidos'];
+                // Aquí podrías iniciar una sesión con $_SESSION
+            } else {
+                echo "Contraseña incorrecta.";
+            }
+        } else {
+            echo "Correo no encontrado.";
+        }
+
+        $stmt->close();
+    }
+
+    public function agregarUsuario($nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion)
+    {
+        $query = "INSERT INTO usuarios (nombre, apellidos, correo, password, edad, plan_base, duracion_suscripcion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("ssssiss", $nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion);
 
         if ($stmt->execute()) {
             echo "Usuario agregado con éxito.";

@@ -3,11 +3,21 @@ require_once '../controlador/usuarios_controller.php';
 $controller = new usuariosController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $correo = $_POST['correo'];
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellidos'];
+    $email = $_POST['correo'];
     $password = $_POST['password'];
+    $edad = $_POST['edad'];
 
-    $controller->iniciarSesion($correo, $password);
-    header("Location: http://localhost:8080/php_programacion/Hito1_T2/vista/lista_usuarios.php");
+    // Asignamos valores predeterminados a los campos opcionales
+    $plan_base = Null;
+    $duracion_suscripcion = Null;
+
+    // Llamamos al método para agregar el usuario
+    $controller->agregarUsuario($nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion);
+
+    // Redirigimos a la lista de usuarios
+    header("Location: lista_usuarios.php");
     exit();
 }
 ?>
@@ -18,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesión</title>
+    <title>Agregar Usuario</title>
     <!-- Link a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -33,14 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         padding-top: 80px;
         /* Espacio para la navbar */
         flex-direction: column;
-        /* Asegura que el pie de página esté al fondo */
+        /* Para que se acomode bien el footer */
     }
 
     .card {
-        margin-top: 50px;
-        border-radius: 12px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        border-radius: 15px;
         width: 100%;
-        max-width: 400px;
+        max-width: 450px;
         padding: 30px;
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -49,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .card h3 {
         text-align: center;
         font-weight: bold;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
         color: #333;
     }
 
@@ -75,15 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         border-color: #004085;
     }
 
-    .text-center a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .text-center a:hover {
-        text-decoration: underline;
-    }
-
     .mt-3 {
         margin-top: 15px;
     }
@@ -98,8 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         padding: 10px;
         text-align: center;
         width: 100%;
-        margin-top: auto;
-        /* Asegura que el footer se quede abajo */
     }
     </style>
 </head>
@@ -123,9 +123,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 
     <div class="card">
-        <h3>Iniciar Sesión</h3>
+        <h3>Formulario de Registro de Usuario</h3>
         <form action="" method="POST">
-            <!-- Campo de correo -->
+            <!-- Campo de nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <!-- Campo de apellidos -->
+            <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+            </div>
+            <!-- Campo de correo electrónico -->
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo Electrónico</label>
                 <input type="email" class="form-control" id="correo" name="correo" required>
@@ -135,15 +145,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <!-- Botón de inicio de sesión -->
-            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <!-- Campo de edad -->
+            <div class="mb-3">
+                <label for="edad" class="form-label">Edad</label>
+                <input type="number" class="form-control" id="edad" name="edad" required min="1">
+            </div>
+            <!-- Botón de agregar usuario -->
+            <button type="submit" class="btn btn-primary">Agregar Usuario</button>
         </form>
-        <div class="text-center mt-3">
-            <p class="mb-0">¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></p>
-            <p class="mt-2"><a href="#">¿Olvidaste tu contraseña?</a></p>
-        </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
     </footer>

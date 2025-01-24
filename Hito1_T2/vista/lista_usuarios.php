@@ -14,7 +14,7 @@ $usuarios = $controller->listarUsuarios();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.php">StreamWeb</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -26,12 +26,17 @@ $usuarios = $controller->listarUsuarios();
                     <li class="nav-item">
                         <a class="nav-link active" href="lista_usuarios.php">Usuarios</a>
                     </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <!-- Alinea a la derecha -->
+                    <img style="width: 40px;" src="../img/icon.png" alt="perfil">
                     <li class="nav-item">
                         <a class="nav-link" href="miPerfil.php">Mi Perfil</a>
                     </li>
                 </ul>
             </div>
         </div>
+    </nav>
 
     </nav>
     <div class="container mt-5" style="margin-bottom: 100px;">
@@ -46,23 +51,22 @@ $usuarios = $controller->listarUsuarios();
                     <th>Edad</th>
                     <th>Plan Base</th>
                     <th>Duracion de Suscripcion</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
 
             <?php foreach ($usuarios as $usuario): ?>
             <tr>
-                <td><?= $usuario['id_socio'] ?></td>
+                <td><?= $usuario['id'] ?></td>
                 <td><?= $usuario['nombre'] ?></td>
-                <td><?= $usuario['apellido'] ?></td>
-                <td><?= $usuario['email'] ?></td>
+                <td><?= $usuario['apellidos'] ?></td>
+                <td><?= $usuario['correo'] ?></td>
                 <td><?= $usuario['edad'] ?></td>
                 <td><?= $usuario['plan_base'] ?></td>
                 <td><?= $usuario['duracion_suscripcion'] ?></td>
                 <td>
-                    <a href="editar_usuario.php?id=<?= $usuario['id_usuario'] ?>"
-                        class="btn btn-sm btn-primary">Editar</a>
-                    <a href="eliminar_usuario.php?id=<?= $usuario['id_usuario'] ?>"
-                        class="btn btn-sm btn-danger">Eliminar</a>
+                    <a href="editar_usuario.php?id=<?= $usuario['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="eliminar_usuario.php?id=<?= $usuario['id'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
                 </td>
             </tr>
             <?php endforeach; ?>
