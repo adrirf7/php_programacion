@@ -9,12 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $edad = $_POST['edad'];
 
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);  // Crea el hash seguro de la contraseña
+
     // Asignamos valores predeterminados a los campos opcionales
     $plan_base = Null;
     $duracion_suscripcion = Null;
 
     // Llamamos al método para agregar el usuario
-    $controller->agregarUsuario($nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion);
+    $controller->agregarUsuario($nombre, $apellido, $email, $hashedPassword, $edad, $plan_base, $duracion_suscripcion);
 
     // Redirigimos a la lista de usuarios
     header("Location: lista_usuarios.php");
@@ -113,10 +115,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="lista_usuarios.php">Usuarios</a>
                     </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <!-- Usuario autenticado: muestra Mi Perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil
+                            (<?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>)</a>
+                    </li>
+                    <?php else: ?>
+                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="miPerfil.php">Mi Perfil</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,11 @@
 <?php
+session_start();
+$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 require_once '../controlador/paquetesController.php';
 $controller = new paquetesController();
 $paquetes = $controller->listarPaquetes();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -77,8 +81,19 @@ $paquetes = $controller->listarPaquetes();
     .col-md-4 {
         margin-bottom: 30px;
     }
+
+    /* Ajuste para no cubrir contenido debajo del navbar fijo */
+    body {
+        padding-top: 50px;
+        /* Agregar espacio para que no se cubra con el navbar */
+    }
+
+    /* Contenedor principal de la página */
+    .container {
+        margin-bottom: 100px;
+    }
     </style>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.php">StreamWeb</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -92,15 +107,23 @@ $paquetes = $controller->listarPaquetes();
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <!-- Alinea a la derecha -->
-                    <img style="width: 40px;" src="../img/icon.png" alt="perfil">
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <!-- Usuario autenticado: muestra Mi Perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil
+                            (<?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>)</a>
+                    </li>
+                    <?php else: ?>
+                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
                     <li class="nav-item">
                         <a class="nav-link" href="miPerfil.php">Mi Perfil</a>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
     </nav>
+
 
     <div class="container mt-5" style="margin-bottom: 100px;">
         <h1 class="text-center mb-4">Paquetes Disponibles</h1>

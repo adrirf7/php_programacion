@@ -2,13 +2,21 @@
 require_once '../controlador/usuarios_controller.php';
 $controller = new usuariosController();
 
+session_start(); // Inicia la sesión PHP
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = $_POST['correo'];
     $password = $_POST['password'];
 
-    $controller->iniciarSesion($correo, $password);
-    header("Location: http://localhost:8080/php_programacion/Hito1_T2/vista/lista_usuarios.php");
-    exit();
+    // Intenta iniciar sesión y guarda los datos del usuario en la sesión si es exitoso
+    $usuario = $controller->iniciarSesion($correo, $password);
+    if ($usuario) {
+        $_SESSION['usuario'] = $usuario; // Guarda los datos del usuario en la sesión
+        header("Location: perfil.php"); // Redirige al perfil
+        exit();
+    } else {
+        $error = "Credenciales incorrectas. Inténtalo de nuevo.";
+    }
 }
 ?>
 
@@ -113,10 +121,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="lista_usuarios.php">Usuarios</a>
                     </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <!-- Usuario autenticado: muestra Mi Perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil
+                            (<?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>)</a>
+                    </li>
+                    <?php else: ?>
+                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="miPerfil.php">Mi Perfil</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

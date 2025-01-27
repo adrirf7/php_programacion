@@ -12,7 +12,7 @@ class usuario
 
     public function iniciarSesion($correo, $password)
     {
-        $query = "SELECT id, nombre, apellidos, password FROM usuarios WHERE correo = ?";
+        $query = "SELECT id, nombre, apellidos, correo, edad, password FROM usuarios WHERE correo = ?";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -20,20 +20,33 @@ class usuario
 
         if ($resultado->num_rows === 1) {
             $usuario = $resultado->fetch_assoc();
+            var_dump($usuario);
 
-            // Verificar la contraseña
             if (password_verify($password, $usuario['password'])) {
-                echo "Inicio de sesión exitoso. Bienvenido, " . $usuario['nombre'] . " " . $usuario['apellidos'];
-                // Aquí podrías iniciar una sesión con $_SESSION
-            } else {
-                echo "Contraseña incorrecta.";
-            }
-        } else {
-            echo "Correo no encontrado.";
-        }
+                // Almacenar los datos del usuario en la sesión
+                session_start(); // Asegúrate de que la sesión esté iniciada
+                $_SESSION['usuario'] = [
+                    'id' => $usuario['id'],
+                    'nombre' => $usuario['nombre'],
+                    'apellidos' => $usuario['apellidos'],
+                    'correo' => $usuario['correo'],
+                    'edad' => $usuario['edad'],
+                ];
 
-        $stmt->close();
+                // Redirigir al perfil
+                header("Location: perfil.php");
+                exit();
+            } else {
+                // Contraseña incorrecta
+                echo "Contraseña incorrecta.";
+                return false;
+            }
+        }
+        // Correo no encontrado
+        echo "Correo no encontrado.";
+        return false;
     }
+
 
     public function agregarUsuario($nombre, $apellido, $email, $password, $edad, $plan_base, $duracion_suscripcion)
     {
