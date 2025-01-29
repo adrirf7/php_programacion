@@ -1,9 +1,9 @@
 <?php
 session_start();
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
-require_once '../controlador/paquetesController.php';
-$controller = new paquetesController();
-$paquetes = $controller->listarPaquetes();
+require_once '../controlador/planes_controller.php';
+$controller = new planesController();
+$planes = $controller->listarPlanes();
 
 
 ?>
@@ -22,31 +22,31 @@ $paquetes = $controller->listarPaquetes();
 <body>
     <style>
     .card {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
         border-radius: 15px;
+        /* Curva de los bordes de la card */
+        overflow: hidden;
+        /* Evita que el contenido sobresalga de las esquinas */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Sombra para las cards */
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        /* Transiciones suaves */
     }
 
     .card:hover {
         transform: translateY(-5px);
+        /* Efecto al pasar el mouse */
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .card-img-top {
-        object-fit: cover;
-        height: 200px;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+        /* Efecto de sombra al pasar el mouse */
     }
 
     .card-body {
-        flex-grow: 1;
-        padding: 1.25rem;
         background-color: #f9f9f9;
+        /* Fondo claro para el contenido */
+        padding: 1.25rem;
+        border-bottom-left-radius: 15px;
+        /* Curvatura en la parte inferior izquierda */
+        border-bottom-right-radius: 15px;
+        /* Curvatura en la parte inferior derecha */
     }
 
     .card-title {
@@ -62,21 +62,73 @@ $paquetes = $controller->listarPaquetes();
         font-size: 1rem;
     }
 
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-        transition: background-color 0.3s ease;
+    .card-text-description {
+        margin-top: 20px;
     }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
+    /* Estilo base para los botones */
+    .btn-custom {
+        border-radius: 0.25rem;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .btn-primary:focus,
-    .btn-primary.focus {
-        box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.5);
+    /* Botón para el Plan Básico */
+    .btn-success {
+        background-color: #28a745;
+        /* Verde */
+        border-color: #28a745;
     }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-success:focus,
+    .btn-success.focus {
+        box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.5);
+    }
+
+    /* Botón para el Plan Estándar */
+    .btn-warning {
+        background-color: #ffc107;
+        /* Amarillo */
+        border-color: #ffc107;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+
+    .btn-warning:focus,
+    .btn-warning.focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5);
+    }
+
+    /* Botón para el Plan Premium */
+    .btn-danger {
+        background-color: #dc3545;
+        /* Rojo */
+        border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .btn-danger:focus,
+    .btn-danger.focus {
+        box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.5);
+    }
+
 
     .col-md-4 {
         margin-bottom: 30px;
@@ -126,35 +178,55 @@ $paquetes = $controller->listarPaquetes();
 
 
     <div class="container mt-5" style="margin-bottom: 100px;">
-        <h1 class="text-center mb-4">Paquetes Disponibles</h1>
-        <div class=" row">
-            <?php foreach ($paquetes as $paquete): ?>
-            <div class="col-md-4 mb-4">
+        <h1>StreamWeb: Tu Entretenimiento a un Clic</h1>
+        <p>StreamWeb es la plataforma de streaming definitiva para los amantes del deporte, el cine y las series. Accede
+            a las competiciones deportivas más emocionantes del mundo, como LaLiga, Premier League, Champions League,
+            Serie A, Bundesliga, NBA, NFL, Fórmula 1, y muchos más. Además, disfruta de una amplia selección de
+            películas y series populares, tanto clásicas como estrenos. <br>
+            <br>
+            Con un sistema de suscripción flexible, podrás elegir los paquetes de contenido que más te interesen y
+            gestionarlos fácilmente. Sin importar lo que te guste, StreamWeb tiene algo para ti. <br>
+            <br>
+            ¡Elige tu plan y comienza a disfrutar de todo el entretenimiento que amas ahora!
+        </p>
+        <h1 class="text-center mb-4">Elige tu Suscripción</h1>
+        <div class="row d-flex justify-content-center">
+            <?php foreach ($planes as $plan): ?>
+            <div class="col-md-4 mb-4 d-flex justify-content-center" style="margin-top: 50px;">
                 <div class="card" style="width: 18rem;">
-                    <!-- Actualiza la ruta de la imagen usando el nombre de la imagen desde la base de datos -->
-                    <img src="../img/<?php echo htmlspecialchars($paquete['imagen']); ?>" class="card-img-top img-fluid"
-                        alt="Imagen del paquete">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($paquete['nombre']); ?></h5>
-                        <p class="card-text">
+                        <h5 class="card-title"><?php echo htmlspecialchars($plan['tipo_plan']); ?></h5>
+                        <p class="card-text">Desde:
+                            <strong><?php echo number_format($plan['precio_mensual'], 2); ?>€</strong>/mes
+                        </p>
+                        <p class="card-text"><strong>(<?php echo htmlspecialchars($plan['dispositivos']); ?>
+                                Dispositivos)</strong></p>
+                        <?php if ($plan['tipo_plan'] == 'Plan Básico'): ?>
+                        <a href="#" class="btn btn-success">Suscribirse al Plan Básico</a>
+                        <?php elseif ($plan['tipo_plan'] == 'Plan Estándar'): ?>
+                        <a href="#" class="btn btn-warning">Suscribirse al Plan Estándar</a>
+                        <?php elseif ($plan['tipo_plan'] == 'Plan Premium'): ?>
+                        <a href="#" class="btn btn-danger">Suscribirse al Plan Premium</a>
+                        <?php endif; ?>
+
+                        <p class="card-text-description">
                             <?php
-                                if ($paquete['nombre'] == 'Deporte') {
-                                    echo "Todo el fútbol y el deporte que te apasiona, al alcance de tu mano. Vive cada momento con intensidad.";
-                                } elseif ($paquete['nombre'] == 'Cine') {
-                                    echo "Disfruta de las mejores películas y estrenos, desde la comodidad de tu hogar. ¡La magia del cine está aquí!";
-                                } elseif ($paquete['nombre'] == 'Infantil') {
-                                    echo "Diversión y entretenimiento para los más pequeños, con contenido educativo y de entretenimiento adecuado para su edad.";
+                                if ($plan['tipo_plan'] == 'Plan Básico') {
+                                    echo "El Plan Básico es ideal para quienes disfrutan de un único dispositivo. Con este plan, podrás contratar un solo pack de contenido para disfrutar en tu dispositivo. Perfecto para quienes buscan una opción económica y sencilla para ver su contenido favorito en un solo dispositivo.";
+                                } elseif ($plan['tipo_plan'] == 'Plan Estándar') {
+                                    echo "El Plan Estándar ofrece hasta dos dispositivos para que puedas disfrutar de tus contenidos favoritos en más de un dispositivo al mismo tiempo. Este plan es ideal para compartir con un amigo o familiar, ya que podrán ver diferentes contenidos simultáneamente en dos dispositivos.";
+                                } elseif ($plan['tipo_plan'] == 'Plan Premium') {
+                                    echo "El Plan Premium es perfecto para hogares o familias donde todos quieren disfrutar de contenido en varios dispositivos. Permite hasta cuatro dispositivos simultáneamente. Ideal para aquellos que desean acceso completo a todos los paquetes y poder ver contenido en múltiples pantallas al mismo tiempo, sin limitaciones.";
                                 }
                                 ?>
                         </p>
-                        <p class="card-text">Precio: $<?php echo number_format($paquete['precio'], 2); ?></p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
+
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
-
         </div>
+    </div>
     </div>
 
     <!-- Incluye los archivos de Bootstrap JS -->

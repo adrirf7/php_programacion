@@ -162,7 +162,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <div class="text-center mt-3">
             <p class="mb-0">¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></p>
-            <p class="mt-2"><a href="#">¿Olvidaste tu contraseña?</a></p>
         </div>
     </div>
 

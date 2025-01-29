@@ -28,13 +28,17 @@ class usuariosController
         return $this->modelo->obtenerUsuarioPorId($id);
     }
 
-    public function actualizarUsuario($id, $nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion)
+    public function actualizarUsuario($id, $nombre, $apellido, $email, $edad)
     {
-        $this->modelo->actualizarUsuario($id, $nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion);
+        $this->modelo->actualizarUsuario($id, $nombre, $apellido, $email, $edad);
     }
 
     public function eliminarUsuario($id)
     {
         $this->modelo->eliminarUsuario($id);
+    }
+    public function actualizarPassword($id, $password)
+    {
+        $this->modelo->actualizarpassword($id, $password);
     }
 }

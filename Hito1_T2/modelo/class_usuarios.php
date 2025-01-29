@@ -30,9 +30,11 @@ class usuario
                     'nombre' => $usuario['nombre'],
                     'apellidos' => $usuario['apellidos'],
                     'correo' => $usuario['correo'],
+                    'password' => $usuario['password'],
                     'edad' => $usuario['edad'],
+                    'plan_base' => $usuario['plan_base'],
+                    'duracion_suscripcion' => $usuario['duracion_suscripcion']
                 ];
-
                 // Redirigir al perfil
                 header("Location: perfil.php");
                 exit();
@@ -84,16 +86,36 @@ class usuario
         return $resultado->fetch_assoc();
     }
 
-    public function actualizarUsuario($id, $nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion)
+    public function actualizarUsuario($id, $nombre, $apellidos, $email, $edad)
     {
-        $query = "UPDATE socios SET nombre = ?, apellido = ?, email = ?, edad = ?, plan_base = ?, duracion_suscipcion = ? WHERE id_socio = ?";
+        $query = "UPDATE usuarios SET nombre = ?, apellidos = ?, correo = ?, edad = ? WHERE id = ?";
         $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("sssissi", $nombre, $apellido, $email, $edad, $plan_base, $duracion_suscripcion, $id);
+        $stmt->bind_param("sssis", $nombre, $apellidos, $email, $edad, $id);
 
         if ($stmt->execute()) {
             echo "Usuario actualizado con éxito.";
+            // Actualizar los datos en la sesión
+            $_SESSION['usuario']['nombre'] = $nombre;
+            $_SESSION['usuario']['apellidos'] = $apellidos;
+            $_SESSION['usuario']['correo'] = $email;
+            $_SESSION['usuario']['edad'] = $edad;
         } else {
             echo "Error al actualizar Usuario: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+
+    public function actualizarPassword($id, $password_nueva)
+    {
+        $query = "UPDATE usuarios SET password = ? WHERE id = ?";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("ss", $password_nueva, $id);
+
+        if ($stmt->execute()) {
+            echo "Contraseña actualizada con éxito.";
+        } else {
+            echo "Error al actualizar la contraseña.";
         }
 
         $stmt->close();

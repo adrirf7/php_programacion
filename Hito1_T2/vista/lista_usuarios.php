@@ -72,7 +72,6 @@ $usuarios = $controller->listarUsuarios();
                     <th>Edad</th>
                     <th>Plan Base</th>
                     <th>Duracion de Suscripcion</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
 
@@ -85,10 +84,6 @@ $usuarios = $controller->listarUsuarios();
                 <td><?= $usuario['edad'] ?></td>
                 <td><?= $usuario['plan_base'] ?></td>
                 <td><?= $usuario['duracion_suscripcion'] ?></td>
-                <td>
-                    <a href="editar_usuario.php?id=<?= $usuario['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="eliminar_usuario.php?id=<?= $usuario['id'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
-                </td>
             </tr>
             <?php endforeach; ?>
         </table>

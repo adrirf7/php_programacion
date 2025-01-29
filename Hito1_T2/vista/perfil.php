@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION['usuario']);
 // Si no hay un usuario en la sesión, redirige a iniciar sesión
 if (!isset($_SESSION['usuario'])) {
     header("Location: miPerfil.php");
@@ -19,13 +18,10 @@ $usuario = $_SESSION['usuario'];
     <title>Mi Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    /* Ajuste para no cubrir contenido debajo del navbar fijo */
     body {
         padding-top: 50px;
-        /* Agregar espacio para que no se cubra con el navbar */
     }
 
-    /* Contenedor principal de la página */
     .container {
         margin-bottom: 100px;
     }
@@ -64,15 +60,18 @@ $usuario = $_SESSION['usuario'];
         </div>
     </nav>
     <div class="container mt-5">
+
         <h1>Bienvenido, <?php echo htmlspecialchars($usuario['nombre']); ?></h1>
         <h5>Detalles de la cuenta </h5>
-        <p><strong>Correo:</strong> <?php echo htmlspecialchars($usuario['correo']); ?></p>
         <p><strong>Nombre completo:</strong> <?php echo htmlspecialchars($usuario['nombre']); ?>
             <?php echo htmlspecialchars($usuario['apellidos']); ?></p>
         <p><strong>Edad:</strong> <?php echo htmlspecialchars($usuario['edad']); ?></p>
+        <p><strong>Correo:</strong> <?php echo htmlspecialchars($usuario['correo']); ?></p>
 
         <a href="editar_perfil.php" class="btn btn-primary">Editar Perfil</a>
-        <a href="cerrar_sesion.php" class="btn btn-danger">Cerrar Sesión</a>
+        <a href="./actualizar_password.php" class="btn btn-warning">Actualizar Contraseña</a>
+        <a href="../modelo/cerrar_sesion.php" class="btn btn-secondary">Cerrar Sesión</a>
+        <a href="../modelo/eliminar_usuario.php" class="btn btn-danger">Eliminar Usuario</a>
     </div>
 </body>
 
