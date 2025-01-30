@@ -106,6 +106,36 @@ class usuario
         $stmt->close();
     }
 
+    public function actualizarPlanes($id, $plan_base, $duracion_suscripcion)
+    {
+        $query = "UPDATE usuarios SET plan_base = ?, duracion_suscripcion = ? WHERE id = ?";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("sss", $plan_base, $duracion_suscripcion, $id);
+
+        if ($stmt->execute()) {
+            echo "Suscripcion añadida con exito.";
+            $_SESSION['usuario']['plan_base'] = $plan_base;
+            $_SESSION['usuario']['duracion_suscripcion'] = $duracion_suscripcion;
+        } else {
+            echo "Error al añadir la suscripcion: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+    public function agregarPaquete($usuario_id, $paquete_id)
+    {
+        $query = "INSERT INTO Usuarios_Paquetes (usuario_id, paquete_id) VALUES (?, ?)";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("ii", $usuario_id, $paquete_id);
+
+        if ($stmt->execute()) {
+            echo "Paquete agregado con éxito.";
+        } else {
+            echo "Error al agregar paquete: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
     public function actualizarPassword($id, $password_nueva)
     {
         $query = "UPDATE usuarios SET password = ? WHERE id = ?";

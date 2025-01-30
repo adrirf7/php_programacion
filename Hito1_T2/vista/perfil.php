@@ -18,13 +18,13 @@ $usuario = $_SESSION['usuario'];
     <title>Mi Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    body {
-        padding-top: 50px;
-    }
+        body {
+            padding-top: 50px;
+        }
 
-    .container {
-        margin-bottom: 100px;
-    }
+        .container {
+            margin-bottom: 100px;
+        }
     </style>
 </head>
 
@@ -44,16 +44,16 @@ $usuario = $_SESSION['usuario'];
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <?php if (isset($_SESSION['usuario'])): ?>
-                    <!-- Usuario autenticado: muestra Mi Perfil -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.php">Mi Perfil
-                            (<?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>)</a>
-                    </li>
+                        <!-- Usuario autenticado: muestra Mi Perfil -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.php">Mi Perfil
+                                (<?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>)</a>
+                        </li>
                     <?php else: ?>
-                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="miPerfil.php">Mi Perfil</a>
-                    </li>
+                        <!-- Usuario no autenticado: redirige a iniciar sesión -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="miPerfil.php">Mi Perfil</a>
+                        </li>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -73,6 +73,9 @@ $usuario = $_SESSION['usuario'];
         <a href="../modelo/cerrar_sesion.php" class="btn btn-secondary">Cerrar Sesión</a>
         <a href="../modelo/eliminar_usuario.php" class="btn btn-danger">Eliminar Usuario</a>
     </div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
+    </footer>
 </body>
 
 </html>

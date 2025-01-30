@@ -41,4 +41,12 @@ class usuariosController
     {
         $this->modelo->actualizarpassword($id, $password);
     }
+    public function actualizarPlanes($id, $plan_base, $duracion_suscripcion)
+    {
+        $this->modelo->actualizarPlanes($id, $plan_base, $duracion_suscripcion);
+    }
+    public function agregarPaquete($usuario_id, $paquete_id)
+    {
+        $this->modelo->agregarPaquete($usuario_id, $paquete_id);
+    }
 }
