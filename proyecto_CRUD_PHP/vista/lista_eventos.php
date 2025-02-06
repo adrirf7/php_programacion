@@ -1,6 +1,6 @@
 <?php
 session_start();
-$usuario = $_SESSION['usuario'];
+$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
 require_once '../controlador/EventosController.php';
 $controller = new EventosController();
