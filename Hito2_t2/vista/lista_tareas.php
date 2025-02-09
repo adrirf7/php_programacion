@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Listado de Tareas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    body {
-        padding-top: 50px;
-    }
+        body {
+            padding-top: 50px;
+        }
 
-    .container {
-        margin-bottom: 200px;
-    }
+        .container {
+            margin-bottom: 200px;
+        }
     </style>
 </head>
 
@@ -52,16 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul class="navbar-nav ms-auto">
                     <img style="width: 40px;" src="../img/icon.png" alt="icono">
                     <?php if (isset($_SESSION['usuario'])): ?>
-                    <!-- Usuario autenticado: muestra Mi Perfil -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.php">Mi Perfil
-                            (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
-                    </li>
+                        <!-- Usuario autenticado: muestra Mi Perfil -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.php">Mi Perfil
+                                (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
+                        </li>
                     <?php else: ?>
-                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.php">Mi Perfil</a>
-                    </li>
+                        <!-- Usuario no autenticado: redirige a iniciar sesión -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.php">Mi Perfil</a>
+                        </li>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -83,37 +83,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </thead>
 
             <?php foreach ($tareas['pendientes'] as $tarea): ?>
-            <tr>
-                <td>
-                    <form method="POST" action="">
-                        <input type="hidden" name="id_tarea" value="<?= $tarea['id'] ?>" onchange="this.form.submit()">
-                        <input type="hidden" name="completar_tarea" value="1">
-                        <input type="checkbox" onchange="this.form.submit()">
-                    </form>
-                </td>
-                <td><?= $tarea['titulo'] ?></td>
-                <td><?= $tarea['descripcion'] ?></td>
-                <td><?= $tarea['estado'] ?></td>
-                <td><?= $tarea['dias_restantes'] ?> dias</td>
-                <td><?= $tarea['fecha_vencimiento'] ?></td>
-                <td>
-                    <a href="./editar_tarea.php?id=<?= $tarea['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="./eliminar_tarea.php?id=<?= $tarea['id'] ?>" class="btn btn-sm btn-danger"
-                        onclick="return confirmarEliminacion();">Eliminar</a>
-                    <script>
-                    function confirmarEliminacion() {
-                        // Mostrar la alerta de confirmación
-                        var resultado = confirm("¿Estás seguro de que quieres eliminar Esta tarea?");
+                <tr>
+                    <td>
+                        <form method="POST" action="">
+                            <input type="hidden" name="id_tarea" value="<?= $tarea['id'] ?>" onchange="this.form.submit()">
+                            <input type="hidden" name="completar_tarea" value="1">
+                            <input type="checkbox" onchange="this.form.submit()">
+                        </form>
+                    </td>
+                    <td><?= $tarea['titulo'] ?></td>
+                    <td><?= $tarea['descripcion'] ?></td>
+                    <td><?= $tarea['estado'] ?></td>
+                    <td><?= $tarea['dias_restantes'] ?> dias</td>
+                    <td><?= $tarea['fecha_vencimiento'] ?></td>
+                    <td>
+                        <a href="./editar_tarea.php?id=<?= $tarea['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="./eliminar_tarea.php?id=<?= $tarea['id'] ?>" class="btn btn-sm btn-danger"
+                            onclick="return confirmarEliminacion();">Eliminar</a>
+                        <script>
+                            function confirmarEliminacion() {
+                                // Mostrar la alerta de confirmación
+                                var resultado = confirm("¿Estás seguro de que quieres eliminar Esta tarea?");
 
-                        if (resultado) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                    </script>
-                </td>
-            </tr>
+                                if (resultado) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            }
+                        </script>
+                    </td>
+                </tr>
             <?php endforeach ?>
         </table>
         <br>
@@ -129,18 +129,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </tr>
             </thead>
             <?php foreach ($tareas['completadas'] as $tarea): ?>
-            <tr>
-                <td>
-                    <form method="POST" action="">
-                        <input type="hidden" name="id_tarea" value="<?= $tarea['id'] ?>">
-                        <input type="hidden" name="descompletar_tarea" value="1">
-                        <input type="checkbox" onchange="this.form.submit()">
-                    </form>
-                </td>
-                <td><?= $tarea['titulo'] ?></td>
-                <td><?= $tarea['descripcion'] ?></td>
-                <td><?= $tarea['fecha_vencimiento'] ?></td>
-            </tr>
+                <tr>
+                    <td>
+                        <form method="POST" action="">
+                            <input type="hidden" name="id_tarea" value="<?= $tarea['id'] ?>">
+                            <input type="hidden" name="descompletar_tarea" value="1">
+                            <input type="checkbox" onchange="this.form.submit()">
+                        </form>
+                    </td>
+                    <td><?= $tarea['titulo'] ?></td>
+                    <td><?= $tarea['descripcion'] ?></td>
+                    <td><?= $tarea['fecha_vencimiento'] ?></td>
+                </tr>
             <?php endforeach ?>
         </table>
     </div>

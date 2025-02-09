@@ -1,3 +1,3 @@
 <?php
-header("Location: ./vista/lista_eventos.php");
+header("Location: lista_tareas.php");
 exit();

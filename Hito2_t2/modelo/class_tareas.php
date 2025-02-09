@@ -98,4 +98,30 @@ class tareas
 
         $stmt->close();
     }
+
+    public function estradisticasTareas($usuario_id)
+    {
+        $query = "SELECT SUM(CASE WHEN t.estado = 'pendiente' THEN 1 ELSE 0 END) AS tareas_pendientes, SUM(CASE WHEN t.estado = 'completada' THEN 1 ELSE 0 END) AS tareas_completadas
+        FROM tareas t 
+        WHERE t.usuario_id = ?;";
+        $stmt = $this->conexion->conexion->prepare($query);
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $this->conexion->conexion->error);
+        }
+
+        $stmt->bind_param("i", $usuario_id);
+
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows > 0) {
+            $datos = $resultado->fetch_assoc();
+        } else {
+            $datos = ["tareas_pendientes" => 0, "tareas_completadas" => 0]; // Si no hay datos, devolver 0
+        }
+
+        $stmt->close();
+        var_dump($datos);
+        return $datos;
+    }
 }
