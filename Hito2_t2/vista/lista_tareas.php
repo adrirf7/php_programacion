@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </nav>
-    <div class="container mt-5" style="margin-bottom: 100px;">
+    <div class="container mt-5" style="margin-bottom: 200px;">
         <h1 class="text-center">Proximas Tareas</h1>
         <table class="table table-responsive shadow-lg table-striped mt-4">
             <thead class="table-dark">

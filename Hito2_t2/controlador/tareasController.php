@@ -37,8 +37,8 @@ class tareasController
     {
         $this->modelo->cambiarEstadoTarea($id_tarea, $estado);
     }
-    public function estradisticasTareas($usuario_id)
+    public function estadisticasTareas($usuario_id)
     {
-        $this->modelo->estradisticasTareas($usuario_id);
+        $this->modelo->estadisticasTareas($usuario_id);
     }
 }

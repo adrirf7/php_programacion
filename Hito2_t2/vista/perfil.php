@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Si no hay un usuario en la sesión, redirige a iniciar sesión
 if (!isset($_SESSION['usuario'])) {
     header("Location: inicio_sesion.php");
     exit();
@@ -8,12 +7,14 @@ if (!isset($_SESSION['usuario'])) {
 // Datos del usuario
 $usuario = $_SESSION['usuario'];
 
+
 require_once '../controlador/tareasController.php';
 $controller = new tareasController();
-$estadisticas = $controller->estradisticasTareas($usuario['id']);
 
-$tareas_pendientes = (int)($estadisticas['tareas_pendientes'] ?? 0);
-$tareas_completadas = (int)($estadisticas['tareas_completadas'] ?? 0);
+
+$estadisticas = $controller->estadisticasTareas($usuario['id']);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -68,9 +69,9 @@ $tareas_completadas = (int)($estadisticas['tareas_completadas'] ?? 0);
         <h1>Bienvenido, <?php echo htmlspecialchars($usuario['nombre']); ?></h1>
         <h5>Detalles de la cuenta </h5>
         <p><strong>Nº Tareas pendientes:</strong>
-            <?php echo htmlspecialchars($tareas_pendientes); ?> </p>
+            <?php echo htmlspecialchars($estadisticas['tareas_pendientes']); ?> </p>
         <p><strong>Nº Tareas Completadas:</strong>
-            <?php echo htmlspecialchars($tareas_completadas); ?> </p>
+            <?php echo htmlspecialchars($estadisticas['tareas_completadas']); ?> </p>
         </p>
         <a href="../modelo/cerrar_sesion.php" class="btn btn-secondary">Cerrar Sesión</a>
         <a href="../modelo/eliminar_usuario.php" class="btn btn-danger"
