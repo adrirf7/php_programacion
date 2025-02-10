@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
 
     // Actualizar datos
     $controller->actualizarTarea($id_tarea, $titulo, $descripcion, $fecha_vencimiento);
-    header("Location: ./lista_eventos.php");
+    header("Location: ./lista_tareas.php");
     exit();
 }
 ?>
