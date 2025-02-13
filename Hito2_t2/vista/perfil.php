@@ -6,15 +6,6 @@ if (!isset($_SESSION['usuario'])) {
 }
 // Datos del usuario
 $usuario = $_SESSION['usuario'];
-
-
-require_once '../controlador/tareasController.php';
-$controller = new tareasController();
-
-
-$estadisticas = $controller->estadisticasTareas($usuario['id']);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -48,18 +39,10 @@ $estadisticas = $controller->estadisticasTareas($usuario['id']);
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <img style="width: 40px;" src="../img/icon.png" alt="icono">
-                    <?php if (isset($_SESSION['usuario'])): ?>
-                        <!-- Usuario autenticado: muestra Mi Perfil -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="perfil.php">Mi Perfil
-                                (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
-                        </li>
-                    <?php else: ?>
-                        <!-- Usuario no autenticado: redirige a iniciar sesión -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="perfil.php">Mi Perfil</a>
-                        </li>
-                    <?php endif; ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil
+                            (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -67,12 +50,7 @@ $estadisticas = $controller->estadisticasTareas($usuario['id']);
 
     <div class="container mt-5">
         <h1>Bienvenido, <?php echo htmlspecialchars($usuario['nombre']); ?></h1>
-        <h5>Detalles de la cuenta </h5>
-        <p><strong>Nº Tareas pendientes:</strong>
-            <?php echo htmlspecialchars($estadisticas['tareas_pendientes']); ?> </p>
-        <p><strong>Nº Tareas Completadas:</strong>
-            <?php echo htmlspecialchars($estadisticas['tareas_completadas']); ?> </p>
-        </p>
+        <h5 style="margin-bottom: 50px;">Añade todas las Tareas y Eventos que desees</h5>
         <a href="../modelo/cerrar_sesion.php" class="btn btn-secondary">Cerrar Sesión</a>
         <a href="../modelo/eliminar_usuario.php" class="btn btn-danger"
             onclick="return confirmarEliminacion();">Eliminar
@@ -92,5 +70,7 @@ $estadisticas = $controller->estadisticasTareas($usuario['id']);
             }
         </script>
     </div>
-
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
+    </footer>
 </body>

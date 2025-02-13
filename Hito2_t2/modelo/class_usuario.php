@@ -42,20 +42,35 @@ class usuario
         echo "Correo no encontrado.";
         return false;
     }
-
     public function agregarUsuario($nombre, $correo, $password)
     {
-        $query = "INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)";
-        $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("sss", $nombre, $correo, $password);
+        // Verificar si el correo ya está registrado
+        $queryVerificar = "SELECT id FROM usuarios WHERE correo = ?";
+        $stmtVerificar = $this->conexion->conexion->prepare($queryVerificar);
+        $stmtVerificar->bind_param("s", $correo);
+        $stmtVerificar->execute();
+        $stmtVerificar->store_result();
 
-        if ($stmt->execute()) {
-            echo "Usuario agregado con éxito.";
-        } else {
-            echo "Error al agregar Usuario: " . $stmt->error;
+        if ($stmtVerificar->num_rows > 0) {
+            $stmtVerificar->close();
+            echo "<script>alert('El correo ya está registrado.');</script>";
+            return false;
+        }
+        $stmtVerificar->close();
+
+        // Insertar nuevo usuario
+        $queryInsertar = "INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)";
+        $stmtInsertar = $this->conexion->conexion->prepare($queryInsertar);
+        $stmtInsertar->bind_param("sss", $nombre, $correo, $password);
+
+        if ($stmtInsertar->execute()) {
+            $stmtInsertar->close();
+            header("Location: perfil.php");
+            return true; // Usuario agregado con éxito
         }
 
-        $stmt->close();
+        $stmtInsertar->close();
+        return "Error en la inserción";
     }
 
     public function eliminarUsuario($id)

@@ -98,40 +98,4 @@ class tareas
 
         $stmt->close();
     }
-
-    public function estadisticasTareas($usuario_id)
-    {
-
-        echo '<br>id de usuario en estadisticastareas: ' . $usuario_id . '<br>';
-
-        $query = "SELECT 
-                    COALESCE(SUM(CASE WHEN t.estado = 'pendiente' THEN 1 ELSE 0 END), 0) AS tareas_pendientes, 
-                    COALESCE(SUM(CASE WHEN t.estado = 'completada' THEN 1 ELSE 0 END), 0) AS tareas_completadas 
-                  FROM tareas t 
-                  WHERE t.usuario_id = ?;";
-
-        if (!$stmt = $this->conexion->conexion->prepare($query)) {
-            error_log("Error en la preparación de la consulta: " . $this->conexion->conexion->error);
-            return ["tareas_pendientes" => 0, "tareas_completadas" => 0];
-        }
-
-        $stmt->bind_param("i", $usuario_id);
-
-        if (!$stmt->execute()) {
-            error_log("Error al ejecutar la consulta: " . $stmt->error);
-            $stmt->close();
-            return ["tareas_pendientes" => 0, "tareas_completadas" => 0];
-        }
-
-        $resultado = $stmt->get_result();
-        $datos = $resultado ? $resultado->fetch_assoc() : ["tareas_pendientes" => 0, "tareas_completadas" => 0];
-
-        // Asegurar que los valores sean enteros
-        $datos['tareas_pendientes'] = (int) ($datos['tareas_pendientes'] ?? 0);
-        $datos['tareas_completadas'] = (int) ($datos['tareas_completadas'] ?? 0);
-
-        $stmt->close();
-        var_dump($datos);
-        return $datos;
-    }
 }

@@ -51,18 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <img style="width: 40px;" src="../img/icon.png" alt="icono">
-                    <?php if (isset($_SESSION['usuario'])): ?>
-                        <!-- Usuario autenticado: muestra Mi Perfil -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="perfil.php">Mi Perfil
-                                (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
-                        </li>
-                    <?php else: ?>
-                        <!-- Usuario no autenticado: redirige a iniciar sesión -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="perfil.php">Mi Perfil</a>
-                        </li>
-                    <?php endif; ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil
+                            (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
+                    </li>
+
                 </ul>
             </div>
         </div>

@@ -8,10 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);  // Crea el hash seguro de la contraseña
-
     $controller->agregarUsuario($nombre, $correo, $hashedPassword);
-    header("Location: perfil.php");
-    exit();
 }
 ?>
 
@@ -46,18 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <img style="width: 40px;" src="../img/icon.png" alt="icono">
-                    <?php if (isset($_SESSION['usuario'])): ?>
-                    <!-- Usuario autenticado: muestra Mi Perfil -->
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php">Mi Perfil
-                            (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
                     </li>
-                    <?php else: ?>
-                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.php">Mi Perfil</a>
-                    </li>
-                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -79,9 +67,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <!-- Botón de agregar usuario -->
-            <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+            <!-- Checkbox para aceptar políticas -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="aceptarPoliticas" onclick="toggleSubmit()">
+                <label class="form-check-label" for="aceptarPoliticas">Acepto las políticas de privacidad</label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnSubmit" disabled>Agregar Usuario</button>
         </form>
+    </div>
+    <!-- Script para el chekbox -->
+    <script>
+    function toggleSubmit() {
+        const checkbox = document.getElementById('aceptarPoliticas');
+        const submitButton = document.getElementById('btnSubmit');
+        submitButton.disabled = !checkbox.checked;
+        submitButton.style.opacity = checkbox.checked ? '1' : '0.5';
+    }
+    </script>
     </div>
 
 </body>
