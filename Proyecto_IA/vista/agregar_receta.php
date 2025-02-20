@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
     if (!empty($nombre) && !empty($receta)) {
         require_once '../controlador/recetas_controller.php';
         $controller = new recetasController();
-        $recetaConSaltos = nl2br($receta);
+        $recetaConSaltos = nl2br($receta); //Añadir saltos de linea
         $controller->agregarReceta($_SESSION['usuario']['id'], $nombre, $recetaConSaltos); // Guardamos la receta
         header("Location: ./lista_recetas.php");
     }
@@ -79,55 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
     <title>Buscar Receta con IA</title>
     <!-- Enlazamos el CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Estilo para el fondo oscuro */
-        .overlay {
-            display: none;
-            /* Ocultar por defecto */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Fondo negro semitransparente */
-            z-index: 9998;
-            /* Justo por debajo del spinner */
-        }
-
-        /* Estilo para el spinner */
-        .spinner-wrapper {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            text-align: center;
-        }
-
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-            border-width: 0.4em;
-        }
-
-        /* Estilo para el mensaje */
-        .loading-text {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: white;
-        }
-
-        body {
-            padding-top: 50px;
-        }
-
-        .container {
-            margin-bottom: 200px;
-        }
-    </style>
+    <link rel="stylesheet" href="../style/agregarStyle.css">
 </head>
 
 <body>
@@ -153,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Buscar Receta con IA</h2>
+                <h2 class="text-center">Añade Tu Receta con IA</h2>
             </div>
             <div class="card-body">
                 <!-- Formulario para solicitar la receta -->
@@ -169,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
                 <div id="overlay" class="overlay"></div>
                 <div id="spinner" class="spinner-wrapper">
                     <div class="spinner-border text-primary" role="status"></div>
-                    <p class="loading-text">Generando la receta...</p>
+                    <p class="loading-text">Tenga paciencia se esta generando la receta...</p>
                 </div>
 
                 <?php
@@ -190,10 +142,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
     </div>
 
     <script>
-        document.getElementById('formulario').onsubmit = function() {
-            document.getElementById('spinner').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        };
+    document.getElementById('formulario').onsubmit = function() {
+        document.getElementById('spinner').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    };
     </script>
 </body>
 

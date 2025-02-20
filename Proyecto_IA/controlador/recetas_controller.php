@@ -14,6 +14,11 @@ class recetasController
         return $this->modelo->obtenerRecetas($usuario_id);
     }
 
+    public function obtenerRecetaPorId($id_receta)
+    {
+        return $this->modelo->obtenerRecetaPorId($id_receta);
+    }
+
     public function agregarReceta($usuario_id, $nombre, $receta)
     {
         $this->modelo->agregarReceta($usuario_id, $nombre, $receta);

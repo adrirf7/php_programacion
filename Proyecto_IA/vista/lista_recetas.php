@@ -8,8 +8,6 @@ if (!isset($_SESSION['usuario'])) {
 require_once '../controlador/recetas_controller.php';
 $controller = new recetasController();
 $recetas = $controller->obtenerRecetas($_SESSION['usuario']['id']);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +67,7 @@ $recetas = $controller->obtenerRecetas($_SESSION['usuario']['id']);
                         <td><?= $receta['nombre'] ?></td>
                         <td><?= $receta['receta'] ?></td>
                         <td>
-                            <a href="editar_evento.php?id=<?= $evento['id_evento'] ?>"
+                            <a href="editar_receta.php?id=<?= $receta['id'] ?>"
                                 class="btn btn-sm btn-primary">Editar</a>
                             <a href="eliminar_receta.php?id=<?= $receta['id'] ?>"
                                 class="btn btn-sm btn-danger">Eliminar</a>

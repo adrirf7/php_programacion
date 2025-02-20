@@ -1,0 +1,47 @@
+/* Estilo para el fondo oscuro */
+.overlay {
+  display: none;
+  /* Ocultar por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo negro semitransparente */
+  z-index: 9998;
+  /* Justo por debajo del spinner */
+}
+
+/* Estilo para el spinner */
+.spinner-wrapper {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  text-align: center;
+}
+
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+  border-width: 0.3em;
+}
+
+/* Estilo para el mensaje */
+.loading-text {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+body {
+  padding-top: 50px;
+}
+
+.container {
+  margin-bottom: 200px;
+}

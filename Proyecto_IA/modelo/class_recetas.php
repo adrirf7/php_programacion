@@ -29,6 +29,16 @@ class recetas
         return $recetas; // Nunca devolver null
     }
 
+    public function obtenerRecetaPorId($id_receta)
+    {
+        $query = "SELECT * FROM recetas WHERE id = ?;";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("i", $id_receta);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        return $resultado->fetch_assoc();
+    }
+
 
     public function agregarReceta($usuario_id, $nombre, $receta)
     {
