@@ -9,19 +9,26 @@ class recetas
     {
         $this->conexion = new Conexion();
     }
+
     public function obtenerRecetas($usuario_id)
     {
         $query = "SELECT id, nombre, receta FROM recetas WHERE usuario_id = ?;";
         $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("s", $usuario_id);
+        $stmt->bind_param("i", $usuario_id);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        $recetas = [];
+
+        if (!$resultado) {
+            die("Error al obtener resultados: " . $this->conexion->conexion->error);
+        }
+
+        $recetas = []; // Siempre inicializar un array vacío
         while ($receta = $resultado->fetch_assoc()) {
             $recetas[] = $receta;
         }
-        return $recetas;
+        return $recetas; // Nunca devolver null
     }
+
 
     public function agregarReceta($usuario_id, $nombre, $receta)
     {

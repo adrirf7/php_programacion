@@ -5,11 +5,11 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: inicio_sesion.php");
     exit();
 }
-$usuario = $_SESSION['usuario'];
-
-require_once '../controlador/recetasController.php';
+require_once '../controlador/recetas_controller.php';
 $controller = new recetasController();
-$recetas = $controller->obtenerRecetas($usuario['id']);
+$recetas = $controller->obtenerRecetas($_SESSION['usuario']['id']);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ $recetas = $controller->obtenerRecetas($usuario['id']);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="./lista_tareas.php">Tus Recetas</a>
+                        <a class="nav-link active" href="./lista_recetas.php">Tus Recetas</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -51,33 +51,34 @@ $recetas = $controller->obtenerRecetas($usuario['id']);
         </div>
     </nav>
     <div class="container mt-5" style="margin-bottom: 100px;">
-        <h1 class="text-center">Proximos Eventos</h1>
+        <h1 class="text-center">Tus recetas</h1>
         <table class="table table-responsive shadow-lg table-scripted mt-4">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Receta</th>
-                </tr>
-            </thead>
-
-            <?php foreach ($recetas as $receta): ?>
-            <tr>
-                <td><?= $receta['id'] ?></td>
-                <td><?= $receta['nombre'] ?></td>
-                <td><?= $receta['receta'] ?></td>
-                <td>
-                    <a href="editar_evento.php?id=<?= $evento['id_evento'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="eliminar_evento.php?id=<?= $evento['id_evento'] ?>"
-                        class="btn btn-sm btn-danger">Eliminar</a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <br>
-        <?php if ($isAdmin): ?>
-        <a href="nuevo_evento.php" class="btn btn-success mt-3">Agregar un nuevo Evento</a>
-        <?php endif; ?>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Receta</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($recetas as $receta): ?>
+                    <tr>
+                        <td><?= $receta['id'] ?></td>
+                        <td><?= $receta['nombre'] ?></td>
+                        <td><?= $receta['receta'] ?></td>
+                        <td>
+                            <a href="editar_evento.php?id=<?= $evento['id_evento'] ?>"
+                                class="btn btn-sm btn-primary">Editar</a>
+                            <a href="eliminar_receta.php?id=<?= $receta['id'] ?>"
+                                class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                        <?php endforeach; ?>
+                </tbody>
+            </table>
+            <br>
+            <a href="agregar_receta.php" class="btn btn-success mt-3">Agregar una nueva Receta</a>
     </div>
     <footer class="bg-dark text-white text-center py-3 mt-5">
         <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>

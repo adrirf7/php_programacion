@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="./lista_tareas.php">Tus Recetas</a>
+                        <a class="nav-link active" href="./lista_recetas.php">Tus Recetas</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
