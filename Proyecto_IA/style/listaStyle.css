@@ -1,0 +1,62 @@
+body {
+  background: #001717;
+  padding-top: 50px;
+}
+
+.container {
+  margin-bottom: 200px;
+}
+
+.logo {
+  margin-right: 10px;
+  width: 55px;
+}
+
+h1 {
+  color: #ffcd42;
+}
+
+th {
+  text-align: center;
+}
+
+/* Columna 1 */
+table td:nth-child(1),
+table th:nth-child(1) {
+  background-color: #924f1b;
+  /* Color de fondo de la columna 1 */
+}
+
+/* Columna 2 */
+table td:nth-child(2),
+table th:nth-child(2) {
+  background-color: #e2ac3f;
+  /* Color de fondo de la columna 2 */
+}
+
+/* Columna 3 */
+table td:nth-child(3),
+table th:nth-child(3) {
+  background-color: #f8ebbe;
+  /* Color de fondo de la columna 3 */
+}
+
+/* Columna 4 */
+table td:nth-child(4),
+table th:nth-child(4) {
+  background-color: #7ba58d;
+  /* Color de fondo de la columna 4 */
+}
+
+.botones_tabla {
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+/* Estilo para la navbar cuando se hace scroll */
+.navbar-scrolled {
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Fondo oscuro con opacidad */
+  transition: background-color 0.3s ease;
+  /* Transición suave */
+}
