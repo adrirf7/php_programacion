@@ -1,0 +1,23 @@
+[
+    {
+      "nombre": "Tarta de Manzana",
+      "descripcion": "Deliciosa tarta con manzanas frescas y una base crujiente.",
+      "imagen": "../img/tarta-de-manzana.jpg"
+    },
+    {
+      "nombre": "Spaghetti Carbonara",
+      "descripcion": "Spaghetti con salsa cremosa, panceta y queso parmesano.",
+      "imagen": "../img/espaguetti_carbonara.avif"
+    },
+    {
+      "nombre": "Ensalada César",
+      "descripcion": "Ensalada fresca con pollo a la parrilla, lechuga y aderezo César.",
+      "imagen": "../img/ensalada-cesar-casera.jpg"
+    },
+    {
+      "nombre": "Sopa de Tomate",
+      "descripcion": "Sopa cremosa de tomate con albahaca y pan crujiente.",
+      "imagen": "../img/sopa_tomate.jpg"
+    }
+  ]
+  

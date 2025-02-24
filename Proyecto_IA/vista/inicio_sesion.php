@@ -1,3 +1,24 @@
+<?php
+require_once '../controlador/usuarios_controller.php';
+$controller = new usuariosController();
+
+session_start(); // Inicia la sesión PHP
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $correo = $_POST['correo'];
+    $password = $_POST['password'];
+
+    // Intenta iniciar sesión y guarda los datos del usuario en la sesión si es exitoso
+    $usuario = $controller->iniciarSesion($correo, $password);
+    if ($usuario) {
+        $_SESSION['usuario'] = $usuario; // Guarda los datos del usuario en la sesión
+        header("Location: perfil.php"); // Redirige al perfil
+        exit();
+    } else {
+        $error = "Credenciales incorrectas. Inténtalo de nuevo.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -81,6 +102,11 @@
         background-color: #4f7c62;
         border-color: rgb(60, 88, 72);
     }
+
+    span {
+        font-weight: bold;
+        color: #1e8449;
+    }
     </style>
 </head>
 
@@ -88,7 +114,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <div class="container-fluid">
             <img class="logo" src="../img/Adobe Express - file.png" alt="">
-            <a class="navbar-brand" href="./presentacion.php">Gestor de Recetas</a>
+            <a class="navbar-brand" href="./presentacion.php">Gestor de <span>Recetas</span></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -129,7 +155,6 @@
     <footer>
         <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
     </footer>
-
     <!-- Link a Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

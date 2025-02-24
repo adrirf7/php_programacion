@@ -23,14 +23,62 @@ $usuario = $_SESSION['usuario'];
 
     .container {
         margin-bottom: 200px;
+        padding: 12px;
+        text-align: center;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background-color: transparent;
+    }
+
+    /* Fondo de la página */
+    body {
+        background-color: #001717;
+        /* Color claro de fondo */
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        height: 100vh;
+        /* Asegura que ocupe toda la altura de la pantalla */
+        margin: 0;
+    }
+
+    h1 {
+        color: #ffcd42;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    h5,
+    p {
+        color: white;
+        text-align: center;
+    }
+
+    .logo {
+        margin-right: 10px;
+        width: 55px;
+    }
+
+    span {
+        font-weight: bold;
+        color: #1e8449;
     }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">Gestor de Recetas</a>
+            <img class="logo" src="../img/Adobe Express - file.png" alt="">
+            <a class="navbar-brand" href="./presentacion.php">Gestor de <span>Recetas</span> </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -70,7 +118,7 @@ $usuario = $_SESSION['usuario'];
         }
         </script>
     </div>
-    <footer class="bg-dark text-white text-center py-3 mt-5">
+    <footer>
         <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
     </footer>
 </body>
