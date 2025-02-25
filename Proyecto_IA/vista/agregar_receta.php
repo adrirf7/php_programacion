@@ -79,13 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
     <title>Buscar Receta con IA</title>
     <!-- Enlazamos el CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../style/agregarStyle.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">Gestor de Recetas</a>
+            <img class="logo" src="../img/Adobe Express - file.png" alt="Logo_receta">
+            <a class="navbar-brand" href="./presentacion.php">Chef<span>IA</span> </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">

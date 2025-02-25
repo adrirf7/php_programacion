@@ -16,6 +16,12 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         padding: 15px;
     }
 
+    .navbar-scrolled {
+        background-color: rgba(0, 0, 0, 0.8) !important;
+        /* Fondo oscuro con opacidad */
+        transition: background-color 0.3s ease-in-out;
+    }
+
     body {
         background: #001717;
         padding-top: 50px;
@@ -122,6 +128,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <div class="container-fluid">
+            <a class="navbar-brand" href="">Chef<span>IA</span></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -130,10 +137,18 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <img style="width: 40px;" src="../img/icon.png" alt="icono">
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <!-- Usuario autenticado: muestra Mi Perfil -->
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php">Mi Perfil
                             (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
                     </li>
+                    <?php else: ?>
+                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

@@ -1,3 +1,62 @@
+/* Fondo de la página */
+body {
+  background-color: #001717;
+  /* Color claro de fondo */
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  height: 100vh;
+  /* Asegura que ocupe toda la altura de la pantalla */
+  margin: 0;
+}
+.logo {
+  margin-right: 10px;
+  width: 55px;
+}
+h1,
+h2 {
+  color: white;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  /* Limita el ancho del formulario */
+  padding: 20px;
+  background-color: transparent;
+  /* Fondo transparente */
+}
+
+p,
+label {
+  color: white;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.btn {
+  background-color: #7ba58d;
+  border-color: #7ba58d;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #4f7c62;
+  border-color: rgb(60, 88, 72);
+}
+
 /* Estilo para el fondo oscuro */
 .overlay {
   display: none;
@@ -38,10 +97,14 @@
   color: white;
 }
 
-body {
-  padding-top: 50px;
+.navbar {
+  margin-bottom: 0;
 }
 
-.container {
-  margin-bottom: 200px;
+.form-control {
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
 }

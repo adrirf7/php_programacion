@@ -106,20 +106,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <img class="logo" src="../img/Adobe Express - file.png" alt="">
         <div class="container-fluid">
-            <a class="navbar-brand" href="./presentacion.php">Gestor de <span>Recetas</span< /a>
-                    <div class=" collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="./lista_recetas.php">Tus Recetas</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ms-auto">
-                            <img style="width: 40px;" src="../img/icon.png" alt="icono">
-                            <li class="nav-item">
-                                <a class="nav-link" href="perfil.php">Mi Perfil </a>
-                            </li>
-                        </ul>
-                    </div>
+            <a class="navbar-brand" href="./presentacion.php">Chef<span>IA</span></a>
+            <div class=" collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./lista_recetas.php">Tus Recetas</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <img style="width: 40px;" src="../img/icon.png" alt="icono">
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.php">Mi Perfil </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container">

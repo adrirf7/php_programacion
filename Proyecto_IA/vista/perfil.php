@@ -78,7 +78,7 @@ $usuario = $_SESSION['usuario'];
     <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <div class="container-fluid">
             <img class="logo" src="../img/Adobe Express - file.png" alt="">
-            <a class="navbar-brand" href="./presentacion.php">Gestor de <span>Recetas</span> </a>
+            <a class="navbar-brand" href="./presentacion.php">Chef<span>IA</span> </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
