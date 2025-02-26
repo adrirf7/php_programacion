@@ -10,145 +10,42 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/presentacionStyle.css">
     <title>Inicio</title>
-    <style>
-    .navbar {
-        padding: 15px;
-    }
-
-    .navbar-scrolled {
-        background-color: rgba(0, 0, 0, 0.8) !important;
-        /* Fondo oscuro con opacidad */
-        transition: background-color 0.3s ease-in-out;
-    }
-
-    body {
-        background: #001717;
-        padding-top: 50px;
-    }
-
-    .container {
-        margin-bottom: 200px;
-    }
-
-    .logo {
-        margin-right: 10px;
-        width: 55px;
-    }
-
-    h1,
-    h2 {
-        color: white;
-    }
-
-    span {
-        font-weight: bold;
-        color: #1e8449;
-    }
-
-    p {
-        color: white;
-    }
-
-    .presentacion {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-
-    /* Estilo del contenedor del carrusel */
-    .carrusel {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        overflow: hidden;
-        /* Oculta las imágenes fuera del área visible */
-        border-radius: 10px;
-    }
-
-    .carrusel-imagenes {
-        display: flex;
-        /* Mostrar las imágenes en fila */
-        transition: transform 1s ease;
-        /* Deslizamiento suave */
-    }
-
-    /* Estilo de las imágenes */
-    .carrusel-imagenes img {
-        width: 100%;
-        height: auto;
-        /* Mantener la proporción de las imágenes */
-        border-radius: 10px;
-    }
-
-    /* Estilo para el grid de recetas */
-    .grid-recetas {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-top: 50px;
-        padding: 0 20px;
-    }
-
-    .receta-card {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        padding: 5px;
-        text-align: center;
-    }
-
-    .receta-card img {
-        height: 300px;
-        object-fit: cover;
-        width: 100%;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-
-    .receta-card h3 {
-        font-size: 1.2em;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .receta-card p {
-        font-size: 0.9em;
-        color: #777;
-    }
-
-    .grid {
-        margin-top: 50px;
-    }
-    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark px-5 fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">Chef<span>IA</span></a>
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="./presentacion.php">
+                <img class="logo img-fluid me-2" src="../img/Adobe Express - file.png" alt="Logo_receta"
+                    style="width: 40px;">
+                Chef<span>IA</span>
+            </a>
+
+            <!-- Botón Hamburguesa -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="./lista_recetas.php">Tus Recetas</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto">
-                    <img style="width: 40px;" src="../img/icon.png" alt="icono">
-                    <?php if (isset($_SESSION['usuario'])): ?>
-                    <!-- Usuario autenticado: muestra Mi Perfil -->
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="nav-item">
+                        <img class="img-fluid me-2" style="width: 40px;" src="../img/icon.png" alt="icono">
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="perfil.php">Mi Perfil
-                            (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)</a>
+                            (<?php echo htmlspecialchars($_SESSION['usuario']['correo']); ?>)
+                        </a>
                     </li>
-                    <?php else: ?>
-                    <!-- Usuario no autenticado: redirige a iniciar sesión -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.php">Mi Perfil</a>
-                    </li>
-                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -250,6 +147,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         })
         .catch(error => console.error('Error al cargar el JSON:', error));
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

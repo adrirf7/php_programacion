@@ -11,7 +11,10 @@ body {
   margin-right: 10px;
   width: 55px;
 }
-
+span {
+  font-weight: bold;
+  color: #1e8449;
+}
 h1 {
   color: #ffcd42;
 }

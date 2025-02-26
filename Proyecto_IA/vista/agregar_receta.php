@@ -105,49 +105,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["guardar_receta"])) {
         </div>
     </nav>
     <div class="container mt-5">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">Añade Tu Receta con IA</h2>
+        <h2 class="text-center">Añade Tu Receta con IA</h2>
+        <!-- Formulario para solicitar la receta -->
+        <form action="" method="post" id="formulario">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre de la receta:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
             </div>
-            <div class="card-body">
-                <!-- Formulario para solicitar la receta -->
-                <form action="" method="post" id="formulario">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre de la receta:</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Consultar Receta</button>
-                </form>
+            <button type="submit" class="btn btn-primary">Consultar Receta</button>
+        </form>
 
-                <!-- Spinner de espera con fondo oscuro y mensaje -->
-                <div id="overlay" class="overlay"></div>
-                <div id="spinner" class="spinner-wrapper">
-                    <div class="spinner-border text-primary" role="status"></div>
-                    <p class="loading-text">Tenga paciencia se esta generando la receta...</p>
-                </div>
+        <!-- Spinner de espera con fondo oscuro y mensaje -->
+        <div id="overlay" class="overlay"></div>
+        <div id="spinner" class="spinner-wrapper">
+            <div class="spinner-border text-warning" role="status"></div>
+            <p class="loading-text">Tenga paciencia se esta generando la receta...</p>
+        </div>
 
-                <?php
-                if (!empty($receta)) {
-                    echo "<h3 class='mt-4'>Pasos para preparar la receta: $nombre</h3>";
-                    echo "<textarea class='form-control' rows='10' name='receta' required>$receta</textarea>";
+        <?php
+        if (!empty($receta)) {
+            echo "<h3 class='mt-4' style='color: white'>Pasos para preparar la receta: $nombre</h3>";
+            echo "<textarea class='form-control' rows='15' name='receta' required>$receta</textarea>";
 
-                    echo "<form action='' method='post' class='mt-3'>
+            echo "<form action='' method='post' class='mt-3'>
                             <input type='hidden' name='nombre' value='$nombre'>
                             <input type='hidden' name='receta' value='$receta'>
                             <input type='hidden' name='guardar_receta' value='true'>
                             <button type='submit' class='btn btn-success'>Guardar Receta</button>
                           </form>";
-                }
-                ?>
-            </div>
-        </div>
+        }
+        ?>
+    </div>
+    </div>
     </div>
 
     <script>
-    document.getElementById('formulario').onsubmit = function() {
-        document.getElementById('spinner').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    };
+        document.getElementById('formulario').onsubmit = function() {
+            document.getElementById('spinner').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        };
     </script>
 </body>
 

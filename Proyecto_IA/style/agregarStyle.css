@@ -19,16 +19,22 @@ h1,
 h2 {
   color: white;
 }
-
+span {
+  font-weight: bold;
+  color: #1e8449;
+}
 .container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1000px;
   /* Limita el ancho del formulario */
   padding: 20px;
   background-color: transparent;
   /* Fondo transparente */
 }
-
+span {
+  font-weight: bold;
+  color: #1e8449;
+}
 p,
 label {
   color: white;

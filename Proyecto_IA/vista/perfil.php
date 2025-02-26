@@ -16,62 +16,7 @@ $usuario = $_SESSION['usuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-    body {
-        padding-top: 50px;
-    }
-
-    .container {
-        margin-bottom: 200px;
-        padding: 12px;
-        text-align: center;
-    }
-
-    footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        background-color: transparent;
-    }
-
-    /* Fondo de la página */
-    body {
-        background-color: #001717;
-        /* Color claro de fondo */
-        justify-content: center;
-        /* Centra horizontalmente */
-        align-items: center;
-        /* Centra verticalmente */
-        height: 100vh;
-        /* Asegura que ocupe toda la altura de la pantalla */
-        margin: 0;
-    }
-
-    h1 {
-        color: #ffcd42;
-        text-align: center;
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-
-    h5,
-    p {
-        color: white;
-        text-align: center;
-    }
-
-    .logo {
-        margin-right: 10px;
-        width: 55px;
-    }
-
-    span {
-        font-weight: bold;
-        color: #1e8449;
-    }
-    </style>
+    <link rel="stylesheet" href="../style/perfilStyle.css">
 </head>
 
 <body>
@@ -105,17 +50,17 @@ $usuario = $_SESSION['usuario'];
             Usuario</a>
 
         <script>
-        function confirmarEliminacion() {
-            // Mostrar la alerta de confirmación
-            var resultado = confirm("¿Estás seguro de que quieres eliminar tu cuenta?");
+            function confirmarEliminacion() {
+                // Mostrar la alerta de confirmación
+                var resultado = confirm("¿Estás seguro de que quieres eliminar tu cuenta?");
 
-            // Si el usuario acepta, continuar con el enlace; si no, cancelar
-            if (resultado) {
-                return true;
-            } else {
-                return false; // Cancela la acción y no hace nada
+                // Si el usuario acepta, continuar con el enlace; si no, cancelar
+                if (resultado) {
+                    return true;
+                } else {
+                    return false; // Cancela la acción y no hace nada
+                }
             }
-        }
         </script>
     </div>
     <footer>

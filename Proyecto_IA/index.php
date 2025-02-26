@@ -1,3 +1,3 @@
 <?php
-header("Location: vista/perfil.php");
+header("Location: vista/presentacion.php");
 exit();

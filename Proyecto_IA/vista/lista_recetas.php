@@ -18,26 +18,6 @@ $recetas = $controller->obtenerRecetas($_SESSION['usuario']['id']);
     <title>Listado de Eventos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/listaStyle.css">
-    <style>
-    span {
-        font-weight: bold;
-        color: #1e8449;
-    }
-    </style>
-    <script>
-    window.onscroll = function() {
-        changeNavbarOnScroll()
-    };
-
-    function changeNavbarOnScroll() {
-        var navbar = document.querySelector('.navbar'); // Seleccionamos la navbar
-        if (window.scrollY > 50) { // Si el usuario ha hecho scroll más de 50px
-            navbar.classList.add('navbar-scrolled'); // Añadir la clase para el color de fondo
-        } else {
-            navbar.classList.remove('navbar-scrolled'); // Eliminar la clase si vuelve al principio
-        }
-    }
-    </script>
 </head>
 
 <body>
@@ -75,17 +55,17 @@ $recetas = $controller->obtenerRecetas($_SESSION['usuario']['id']);
             </thead>
             <tbody>
                 <?php foreach ($recetas as $receta): ?>
-                <tr>
-                    <td><?= $receta['id'] ?></td>
-                    <td><?= $receta['nombre'] ?></td>
-                    <td><?= $receta['receta'] ?></td>
-                    <td>
-                        <a href="editar_receta.php?id=<?= $receta['id'] ?>" class="btn btn-sm botones_tabla"
-                            style="background: #924f1b">Editar</a>
-                        <a href="eliminar_receta.php?id=<?= $receta['id'] ?>" class="btn btn-sm botones_tabla"
-                            style="background: #2a0308">Eliminar</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= $receta['id'] ?></td>
+                        <td><?= $receta['nombre'] ?></td>
+                        <td><?= $receta['receta'] ?></td>
+                        <td>
+                            <a href="editar_receta.php?id=<?= $receta['id'] ?>" class="btn btn-sm botones_tabla"
+                                style="background: #924f1b">Editar</a>
+                            <a href="eliminar_receta.php?id=<?= $receta['id'] ?>" class="btn btn-sm botones_tabla"
+                                style="background: #2a0308">Eliminar</a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -95,6 +75,20 @@ $recetas = $controller->obtenerRecetas($_SESSION['usuario']['id']);
     <footer class="text-white text-center py-3 mt-5">
         <p style="color: #FFCD42;">&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
     </footer>
+    <script>
+        window.onscroll = function() {
+            changeNavbarOnScroll()
+        };
+
+        function changeNavbarOnScroll() {
+            var navbar = document.querySelector('.navbar'); // Seleccionamos la navbar
+            if (window.scrollY > 50) { // Si el usuario ha hecho scroll más de 50px
+                navbar.classList.add('navbar-scrolled'); // Añadir la clase para el color de fondo
+            } else {
+                navbar.classList.remove('navbar-scrolled'); // Eliminar la clase si vuelve al principio
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -28,86 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Inicio de sesión</title>
     <!-- Link a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-    .navbar {
-        margin-bottom: 0;
-    }
+    <link rel="stylesheet" href="../style/registroStyle.css">
 
-    .form-control {
-        border-radius: 8px;
-        padding: 15px;
-        font-size: 16px;
-        border: 1px solid #ddd;
-        margin-bottom: 20px;
-    }
-
-    /* Fondo de la página */
-    body {
-        background-color: #001717;
-        /* Color claro de fondo */
-        display: flex;
-        justify-content: center;
-        /* Centra horizontalmente */
-        align-items: center;
-        /* Centra verticalmente */
-        height: 100vh;
-        /* Asegura que ocupe toda la altura de la pantalla */
-        margin: 0;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 400px;
-        /* Limita el ancho del formulario */
-        padding: 20px;
-        background-color: transparent;
-        /* Fondo transparente */
-    }
-
-    .logo {
-        margin-right: 10px;
-        width: 55px;
-    }
-
-    h1 {
-        color: #ffcd42;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    p,
-    label {
-        color: white;
-    }
-
-    footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        background-color: transparent;
-    }
-
-    .btn {
-        background-color: #7ba58d;
-        border-color: #7ba58d;
-        padding: 12px;
-        font-size: 18px;
-        border-radius: 8px;
-        width: 100%;
-    }
-
-    .btn:hover {
-        background-color: #4f7c62;
-        border-color: rgb(60, 88, 72);
-    }
-
-    span {
-        font-weight: bold;
-        color: #1e8449;
-    }
-    </style>
 </head>
 
 <body>
@@ -145,16 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <!-- Botón de inicio de sesión -->
-            <button type="submit" class="btn w-100">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
         </form>
         <div class="text-center mt-3">
             <p class="mb-0">¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></p>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> Adrian Rodriguez. Todos los derechos reservados.</p>
-    </footer>
     <!-- Link a Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
